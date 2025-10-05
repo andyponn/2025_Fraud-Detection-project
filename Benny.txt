@@ -1,0 +1,8 @@
+cd /your/project
+python3 -m venv virtual
+
+source ./virtual/bin/activate
+(通常Select 好資料夾 vscode會幫我自己寫)
+
+pip install -r requirements.txt
+pip freeze > requirements.txt (Run this after u install new packages) 
