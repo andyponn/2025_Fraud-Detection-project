@@ -9,7 +9,7 @@ tags: finalytics
 - Reviewed by Teng
 
 ## 以個人為單位註冊帳號
-1. 先至國網中心官網(https://www.nchc.org.tw/)，下滑至計算資源服務網，左側點選前往申請。![](https://i.imgur.com/iJJ9uoF.png)
+1. 先至[國網中心官網](https://www.nchc.org.tw/)，下滑至計算資源服務網，左側點選前往申請。![](https://i.imgur.com/iJJ9uoF.png)
 2. 右上角點選註冊，並填寫完註冊資料，完成註冊流程。主機帳號可自行設定，方便記憶就好，後續也可查詢。![](https://i.imgur.com/rICrBRg.jpg)
 3. 發送"會員帳號(即註冊的email)"給鄧老師(venteng@gmail.com)，鄧老師會將每人的帳號登錄至計畫內，並分派資源額度
 4. 使用[TWCC服務](https://www.twcc.ai/)執行python jupyter，請參考[開發型容器的使用說明](https://man.twcc.ai/@twccdocs/doc-ccs-main-zh/https%3A%2F%2Fman.twcc.ai%2F%40twccdocs%2Fguide-ccs-create-zh)
