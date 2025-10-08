@@ -1,0 +1,87 @@
+
+✅ Stepwise completed with 23 variables: ['amount', 'zip', 'longitude', 'merchant_id', 'use_chip_Swipe Transaction', 'credit_limit', 'num_credit_cards', 'errors_missing_flag', 'use_chip_Chip Transaction', 'transaction_id', 'yearly_income', 'latitude', 'client_id_x', 'has_chip_YES', 'credit_score', 'retirement_age', 'card_type_Credit', 'card_type_Debit', 'mcc_code', 'card_brand_Visa', 'card_brand_Mastercard', 'card_brand_Amex', 'card_id']
+Train Accuracy: 0.9985, Test Accuracy: 0.9985
+=== Overall Model Fit ===
+                          Measure       Value Change_from_Base Change_pvalue
+0  -2 Log Likelihood (−2LL) value  126114.885        32995.727           0.0
+1                Cox and Snell R2       0.005                               
+2                   Nagelkerke R2       0.209                               
+3            Pseudo R2 (McFadden)       0.207                               
+4              Hosmer-Lemeshow χ2   32995.727                               
+
+=== Variables in the Equation ===
+          Independent Variable             B    Std. Error         Wald  df  \
+0                        const -5.292035e+00  2.534512e-01   435.970008   1   
+1                       amount  2.619412e-03  4.970449e-05  2777.258399   1   
+2                          zip -9.419831e-05  1.373477e-06  4703.738293   1   
+3                    longitude -2.077493e-02  5.837857e-04  1266.403609   1   
+4                  merchant_id  1.067403e-05  3.716056e-07   825.072135   1   
+5   use_chip_Swipe Transaction -7.152812e-01  4.048087e-02   312.215235   1   
+6                 credit_limit -1.501740e-05  1.314672e-06   130.483201   1   
+7             num_credit_cards  9.361115e-02  6.316508e-03   219.634747   1   
+8          errors_missing_flag -7.901281e-01  4.841736e-02   266.313303   1   
+9    use_chip_Chip Transaction  8.149060e-01  3.404956e-02   572.785473   1   
+10              transaction_id -4.272704e-08  2.402336e-09   316.328158   1   
+11               yearly_income -7.409976e-06  5.832643e-07   161.399760   1   
+12                    latitude -2.335531e-02  1.954936e-03   142.727125   1   
+13                 client_id_x -1.123827e-04  1.703471e-05    43.524055   1   
+14                has_chip_YES -1.904791e-01  3.531443e-02    29.093100   1   
+15                credit_score  7.019687e-04  1.583567e-04    19.650009   1   
+16              retirement_age  1.319879e-02  2.910833e-03    20.560504   1   
+17            card_type_Credit -3.022556e-01  4.071155e-02    55.120543   1   
+18             card_type_Debit -2.331958e-01  4.067593e-02    32.867493   1   
+19                    mcc_code -3.544164e-05  1.157822e-05     9.370090   1   
+20             card_brand_Visa -3.294481e-01  5.637146e-02    34.155089   1   
+21       card_brand_Mastercard -2.931285e-01  5.702473e-02    26.423457   1   
+22             card_brand_Amex -3.024703e-01  6.384412e-02    22.445213   1   
+23                     card_id -1.309347e-05  5.842951e-06     5.021638   1   
+
+             Sig.    Exp(B)  
+0    8.157121e-97  0.005032  
+1    0.000000e+00  1.002623  
+2    0.000000e+00  0.999906  
+3   2.260800e-277  0.979439  
+4   1.909993e-181  1.000011  
+5    7.188794e-70  0.489055  
+6    3.212394e-30  0.999985  
+7    1.086563e-49  1.098133  
+8    7.218198e-60  0.453787  
+9   1.391246e-126  2.258963  
+10   9.135286e-71  1.000000  
+11   5.595331e-37  0.999993  
+12   6.743637e-33  0.976915  
+13   4.187797e-11  0.999888  
+14   6.898222e-08  0.826563  
+15   9.300289e-06  1.000702  
+16   5.777589e-06  1.013286  
+17   1.133599e-13  0.739149  
+18   9.865930e-09  0.791998  
+19   2.205546e-03  0.999965  
+20   5.088997e-09  0.719321  
+21   2.741904e-07  0.745926  
+22   2.162237e-06  0.738990  
+23   2.503248e-02  0.999987  
+
+=== Variables Not in the Equation ===
+  Independent Variable  Score Statistic (LRT)  Significance
+0          current_age                  0.474        0.4911
+1           total_debt                  0.841        0.3591
+2          gender_Male                  0.079        0.7780
+3                  cvv                  0.861        0.3535
+4     num_cards_issued                  0.707        0.4005
+
+================================================
+
+=== Accuracy in Training and Testing dataset ===
+
+=== Classification Matrix — Training Sample ===
+Actual Group  Predicted Fraud (1)  Predicted Normal (0)   Total  % Correct
+   Fraud (1)                   20                 10571   10591        0.2
+  Normal (0)                   49               7121330 7121379      100.0
+       Total                   69               7131901 7131970       99.9
+
+=== Classification Matrix — Holdout (Test) Sample ===
+Actual Group  Predicted Fraud (1)  Predicted Normal (0)   Total  % Correct
+   Fraud (1)                    7                  2734    2741        0.3
+  Normal (0)                   14               1780238 1780252      100.0
+       Total                   21               1782972 1782993       99.8
