@@ -1,0 +1,104 @@
+
+
+
+### 單一變數測試用，查看哪種轉換較佳
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy import stats
+
+# === 統一設定要分析的欄位名稱 ===
+col = "amount"
+
+# === 準備資料（不動原始 df） ===
+data = df[col].copy()
+
+# === 建立結果容器 ===
+results = []
+transformations = [] 
+
+# === (0) 原始資料 ===
+orig_skew = stats.skew(data, bias=False, nan_policy='omit')
+orig_kurt = stats.kurtosis(data, bias=False, nan_policy='omit')
+results.append(['Original', orig_skew, orig_kurt])
+transformations.append(('Original', data))
+
+# === (1) Log 轉換（保留你的原始邏輯）===
+log_base = np.where(data < 0, 0, data)
+log_trans = np.log(log_base + 1)
+results.append([
+    'Log(x+1, negatives→0)',
+    stats.skew(log_trans, bias=False, nan_policy='omit'),
+    stats.kurtosis(log_trans, bias=False, nan_policy='omit')
+])
+transformations.append(('Log(x+1, negatives→0)', log_trans))
+
+# === (2) 平方根轉換 ===
+sqrt_base = np.where(data < 0, 0, data)
+sqrt_trans = np.sqrt(sqrt_base)
+results.append([
+    'Square root (negatives→0)',
+    stats.skew(sqrt_trans, bias=False, nan_policy='omit'),
+    stats.kurtosis(sqrt_trans, bias=False, nan_policy='omit')
+])
+transformations.append(('Square root (negatives→0)', sqrt_trans))
+
+# === (3) 立方根轉換 ===
+cube_trans = np.cbrt(data)  # 可直接處理負值
+results.append([
+    'Cube root',
+    stats.skew(cube_trans, bias=False, nan_policy='omit'),
+    stats.kurtosis(cube_trans, bias=False, nan_policy='omit')
+])
+transformations.append(('Cube root', cube_trans))
+
+# === (4) Box–Cox 轉換（需全為正值） ===
+boxcox_base = np.where(data <= 0, np.nan, data)
+if np.all(np.isfinite(boxcox_base)) and np.nanmin(boxcox_base) > 0:
+    boxcox_trans, lmbda = stats.boxcox(boxcox_base)
+    results.append([
+        f'Box–Cox (λ={lmbda:.3f})',
+        stats.skew(boxcox_trans, bias=False, nan_policy='omit'),
+        stats.kurtosis(boxcox_trans, bias=False, nan_policy='omit')
+    ])
+    transformations.append((f'Box–Cox (λ={lmbda:.3f})', boxcox_trans))
+else:
+    results.append(['Box–Cox (skip: nonpositive data)', np.nan, np.nan])
+
+# === (5) Yeo–Johnson 轉換（可處理負值） ===
+yj_trans, lmbda_yj = stats.yeojohnson(data)
+results.append([
+    f'Yeo–Johnson (λ={lmbda_yj:.3f})',
+    stats.skew(yj_trans, bias=False, nan_policy='omit'),
+    stats.kurtosis(yj_trans, bias=False, nan_policy='omit')
+])
+transformations.append((f'Yeo–Johnson (λ={lmbda_yj:.3f})', yj_trans))
+
+# === 結果表格 ===
+df_results = pd.DataFrame(results, columns=['Transformation', 'Skewness', 'Kurtosis'])
+print(df_results)
+
+# === (A) 畫出所有直方圖 ===
+n = len(transformations)
+fig, axes = plt.subplots(nrows=n, ncols=1, figsize=(8, 3*n))
+plt.subplots_adjust(hspace=0.4)
+
+for i, (title, series) in enumerate(transformations):
+    ax = axes[i]
+    series = pd.Series(series).dropna()
+    ax.hist(series, bins=50, color='skyblue', edgecolor='black', alpha=0.7)
+    ax.set_title(f"{title}", fontsize=12)
+    ax.set_xlabel(col)
+    ax.set_ylabel("Frequency")
+    ax.grid(alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+
+
+## 參數調整參考 
+#fig, axes = plt.subplots(1, 2)
+#axes[0].hist(data, bins=100)
+#axes[1].hist(yj_trans, bins=100)
+
+## age都不建議轉換以保留參數可解釋性

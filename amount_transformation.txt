@@ -1,0 +1,7 @@
+                     Transformation  Skewness    Kurtosis
+0                          Original  5.226846  111.279744
+1             Log(x+1, negatives→0) -0.559664   -0.358987
+2         Square root (negatives→0)  1.283660    5.022708
+3                         Cube root -1.705728    5.084572
+4  Box–Cox (skip: nonpositive data)       NaN         NaN
+5             Yeo–Johnson (λ=0.976)  3.658878   83.135841
