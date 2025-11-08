@@ -2,3 +2,4 @@
 *.json
 virtual/
 .DS_Store
+*.htmlfraud_map.html
